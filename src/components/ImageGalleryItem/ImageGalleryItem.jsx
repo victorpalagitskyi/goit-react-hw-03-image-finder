@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import css from '../styles.css'
+import css from '../styles.module.css'
 import { Modal } from 'components/Modal/Modal';
 
 export default class ImageGalleryItem extends Component {

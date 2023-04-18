@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { RotatingLines } from 'react-loader-spinner'
 
-import css from './styles.css'
+import css from './styles.module.css'
 import { SearchBar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { LoadMoreBtn } from './Button/Button';
-import InfinitySpin from './Loader/Loader';
 
 export class App extends Component {
   state = {
@@ -73,7 +73,13 @@ export class App extends Component {
         {images.length > 0 && !isLoading && images.length < totalHits && (
           <LoadMoreBtn onClick={this.incrementNumberOfPage}></LoadMoreBtn>
         )}
-        {isLoading && <InfinitySpin /> }
+        {isLoading && <RotatingLines
+         strokeColor="grey"
+         strokeWidth="5"
+         animationDuration="0.75"
+         width="96"
+         visible={true}
+         /> }
       </div>
     );
   }

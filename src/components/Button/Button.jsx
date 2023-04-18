@@ -1,4 +1,4 @@
-import css from '../styles.css'
+import css from '../styles.module.css'
 export const LoadMoreBtn = ({ onClick }) => {
   return (
     <div>

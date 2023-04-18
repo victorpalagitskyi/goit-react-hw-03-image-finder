@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import css from '../styles.css'
+import css from '../styles.module.css'
 
 export class Modal extends Component {
   hideModalKeydown = e => {
