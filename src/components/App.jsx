@@ -17,16 +17,6 @@ export class App extends Component {
     error: false,
   };
 
-  onSearchSubmit = value => {
-    this.setState({ searchValue: value });
-  };
-
-  incrementNumberOfPage = () => {
-    this.setState(prevState => {
-      return { numberOfPage: prevState.numberOfPage + 1 };
-    });
-  };
-
   componentDidUpdate(_, prevState) {
     if (prevState.searchValue !== this.state.searchValue) {
       this.setState({ isLoading: true, numberOfPage: 1})
@@ -62,6 +52,15 @@ export class App extends Component {
         .finally(()=>{this.setState({isLoading: false})})
     }
   }
+   onSearchSubmit = value => {
+    this.setState({ searchValue: value });
+  };
+
+  incrementNumberOfPage = () => {
+    this.setState(prevState => {
+      return { numberOfPage: prevState.numberOfPage + 1 };
+    });
+  };
 
   render() {
     const { images, isLoading, totalHits, error } = this.state;
