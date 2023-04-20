@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { RotatingLines } from 'react-loader-spinner'
 
 import css from './styles.module.css'
 import { SearchBar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { LoadMoreBtn } from './Button/Button';
+import * as SearchService from './SearchService'
+
 
 export class App extends Component {
   state = {
@@ -16,14 +17,11 @@ export class App extends Component {
     totalHits: 0,
     error: false,
   };
-
+  
   componentDidUpdate(_, prevState) {
     if (prevState.searchValue !== this.state.searchValue) {
       this.setState({ isLoading: true, numberOfPage: 1})
-      return axios
-        .get(
-          `https://pixabay.com/api/?q=${this.state.searchValue}&page=1&key=35510757-d0f590ce383c890c04ecc88d8&image_type=photo&orientation=horizontal&per_page=12`
-        )
+      SearchService.getImages(this.state.searchValue)
         .then(data =>
           this.setState(prev => ({
             ...prev,
@@ -37,10 +35,7 @@ export class App extends Component {
 
     if (prevState.numberOfPage < this.state.numberOfPage) {
       this.setState({ isLoading: true });
-      return axios
-        .get(
-          `https://pixabay.com/api/?q=${this.state.searchValue}&page=${this.state.numberOfPage}&key=35510757-d0f590ce383c890c04ecc88d8&image_type=photo&orientation=horizontal&per_page=12`
-        )
+      SearchService.getImages(this.state.searchValue, this.state.numberOfPage)
         .then(data =>
           this.setState(prevState => {
             return {
